@@ -14,7 +14,7 @@
 
     const fetchBookmarks = () => {
         return new Promise((resolve) =>{
-            chrome.storage.sync.get(([currentVideo], obj) => {
+            chrome.storage.sync.get([currentVideo], (obj) => {
                 resolve(obj[currentVideo] ? JSON.parse(obj[currentVideo]) : []);
             });
         });
@@ -27,6 +27,7 @@
 
         if (!bookmarkBtnExists) {
             const bookmarkBtn = document.createElement("img");
+            console.log("Inside the if condition");
 
             bookmarkBtn.src = chrome.runtime.getURL("assets/bookmark.png");
             bookmarkBtn.className = "ytp-button " + "bookmark-btn";
@@ -60,7 +61,7 @@
 
 const getTime = t => {
     var date = new Date(0);
-    date.setSeconds(1);
+    date.setSeconds(t);
 
-    return date.toISOString().substring(11);
+    return date.toISOString().substring(11,19);
 }
